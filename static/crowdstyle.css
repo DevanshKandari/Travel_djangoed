@@ -1,0 +1,91 @@
+.headings{
+    font-family: 'Cormorant Garamond', serif;
+    
+}
+.nav-link{
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+}
+.navbarC{
+    background-color: rgb(0, 116, 137);
+    position: sticky;
+    top: 0;
+}
+.about{
+    background-color:#56c9d4;
+}
+.para{
+    font-family:'Cinzel Decorative', cursive;
+    font-size: 1.5rem;
+}
+.car{
+    background-image: url('img/carback2.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode:darken;
+}
+.dropdown-menu{
+    background-color:#56c9d4;
+    z-index: 9;
+
+}
+.abtI{
+    background-position-x: center;
+    margin-top: 5%;
+    background-image: url('img/crowd2.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover; 
+    
+}
+.abtHead{
+    font-weight: 700;
+}
+.abt{
+    text-align:end ;
+    font-size: 4rem;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.abtP{
+    padding-top: 11%;
+    font-family: 'Poiret One', cursive;
+    font-size: 1.3rem;
+    text-align: justify;
+}
+.join{
+    font-family: 'Cormorant Garamond', serif;   
+    max-width: 70px;
+    max-height: 40px;
+}
+.wall{
+    background-image: url('img/crowd.webp');
+    height: 700px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.wall::after{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    right: 0;
+    bottom: 100px;
+    opacity: .5;
+    background-color: #56c9d4;
+    z-index: 0;
+}
+.wallH{
+    margin-top: 12%;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;   
+    color: rgb(255, 255, 255);
+    font-size: 2rem;
+    z-index: 9;
+}
+.wallp{
+    text-align: center;
+    font-family: 'Poiret One', cursive; ;
+    color: rgb(255, 255, 255);
+    font-size: larger;
+    z-index: 9;
+}

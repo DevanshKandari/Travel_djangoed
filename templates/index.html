@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eXplore</title>
+    <link rel="icon" type="image" href="icons/travelling.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style1.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Dancing+Script:wght@400;500;600;700&family=Engagement&family=Lily+Script+One&family=Poiret+One&display=swap&family=Engagement&family=Lily+Script+One&family=Poiret+One&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;1,100;1,300;1,500&family=Caveat:wght@400;500&family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Dancing+Script:wght@400;500;600;700&family=Engagement&family=Josefin+Sans&family=Lily+Script+One&family=Poiret+One&display=swap" rel="stylesheet">
+<!--
+    font-family: 'Caveat', cursive;
+font-family: 'Cinzel Decorative', cursive;
+font-family: 'Cormorant Garamond', serif;
+font-family: 'Dancing Script', cursive;
+font-family: 'Engagement', cursive;
+font-family: 'Lily Script One', cursive;
+font-family: 'Poiret One', cursive;
+-->
+
+</head>
+<body>
+
+    <!--HEAD-->
+
+
+<header>
+    <nav class=" ps-lg-4 ps-0 navbar fixed-top navbar-expand-lg ">
+        
+          <a class="navbar-brand mb-1 ms-5" href="#"><img src="static/icons/travelling.png" height="40px" width="40px" alt="">
+          </a>
+          <button class="navbar-toggler me-5" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse h-100 navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link ms-5 " aria-current="page" href="index"> HOME</a>
+              </li>
+              <li class="nav-item ms-5">
+                <a class="nav-link" href="about">ABOUT</a>
+              </li>
+              <li class="nav-item ms-5 dropdown">
+                <a class="nav-link dropdown-toggle" href="dest.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    DESTINATION
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="trekking.html">Trekking</a></li>
+                  <li><a class="dropdown-item" href="trekkless.html">Trek-less</a></li>
+                  <li><a class="dropdown-item" href="crowd.html">Crowd</a></li>
+                  <li><a class="dropdown-item" href="spirit.html">Spiritual</a></li>
+                </ul>
+              </li>
+              <li class="nav-item ms-5">
+                <a class="nav-link" href="blog">BLOG</a>
+              </li>
+            </ul>
+            {%if user.is_authenticated %}
+             <a href="signout"><button class=" fs-6 mx-5 logButton" type="submit">Logout</button></a> 
+          {% else %}
+          <a href="signin"><button class=" fs-6 mx-5 logButton" type="submit">Login</button></a> 
+          {%endif%}
+          </div>
+      
+      </nav>
+      {%if messages %}
+      {%for message in messages%}
+      <div class="mt-5 pt-4 pb-2 alert alert-success my-0" role="alert">
+        <strong>{{message}}</strong>
+      </div>
+      {%endfor%}
+      {%endif%}
+  </header>
+<section>
+    <div class="owl-carousel owl-theme">
+        <div class="item">
+          <div class="container-fluid position-absolute">
+            <div class="row">
+              {% if user.is_authenticated %}
+              <h1 class="owlContent display-1 ">Welcome,<span class="text-dark">{{user.username}}</span></h1>
+              <h2 class="owlContent1  ">To Explore, A site for<br><span class="you">you</span> </h2>
+              {%else%}
+              <h1 class="owlContent display-1 ">Welcome To e<span class="X">X</span>plore</h1>
+              <h2 class="owlContent1  ">A Site For The explorer in<br><span class="you">you</span> </h2>
+              {%endif%}
+            </div>
+          </div> 
+          <img src="static/img/Ljap6.jpeg" class="img-fluid " alt="">
+        </div>
+        <div class="item">
+          <div class="container-fluid position-absolute">
+            <div class="row">
+              <h1 class="owlContent2 display-1 ">Explore</h1>
+              <p class="def text-center"><span class="text-dark">(vrb.) </span>To Try To Discover or To Learn About</p> 
+            </div>
+        </div>
+          <img src="static/img/Ljap5.jpeg" class="img-fluid" alt=""></div>
+        <div class="item">
+          <div class="container-fluid position-absolute">
+              <div class="row">
+                <h2 class="owlContent3 display-3">Not All Those Who Wander are <br><span class="X">lost</span> </h2>    
+                
+              </div>
+          </div>
+          
+          <img src="static/img/Ljap3.jpeg" class="img-fluid " alt=""></div>
+        
+    </div>
+    </section> 
+
+
+    <!--INFORMATION-->
+
+<section class="info ">
+  <div class="container">
+    <div class="row">
+      <h2 class="heading text-center ">What's This About?</h2>
+      <div class="col-lg-12 pt-lg-3">
+        <p class="para ">This site is about exploring places or things ,Here is the example of some places in North
+          India(Uttarakhand) best known for their ecstatic glimpses. 
+        . Some of them are:
+        </p>
+      </div>
+      <div class="col-lg-4 lg h-100 pt-lg-4 ">
+        <div class="p gall">
+          <h2 class=" gallH ">Har Ki Doon</h2>
+          <div class="c gallI">
+              <img src="static/img/harkiDun.jpeg" class="card-img" height="300px"  alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-6 sm h-100 pt-lg-4 ">
+        <div class="p gall">
+          <h2 class=" gallH ">Har Ki Doon</h2>
+          <div class="c gallI">
+              <img src="static/img/harkiDun.jpeg" class="card-img" height="300px"  alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 lg h-100 pt-lg-4">
+        <div class="p gall">
+          <h2 class=" gallH ">Himalayas <br> from Pauri</h2>
+          <div class="c gallI">
+            <img src="static/img/selfImages/img3.jpg" class="card-img" height="300px"   alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-6 sm h-100 pt-lg-4">
+        <div class="p gall">
+          <h2 class=" gallH ">Himalayas <br> from Pauri</h2>
+          <div class="c gallI">
+            <img src="static/img/selfImages/img3.jpg" class="card-img" height="300px"   alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 lg pt-lg-4">
+       <div class="p gall">
+        <h2 class=" gallH ">Nainital</h2>
+        <div class="c gallI">
+          <img src="static/img/nainitaal3.jpeg"  class="card-img" height="300px"    alt="">
+        </div>
+       </div>
+      </div>
+      <div class="col-12 mt-4 sm pt-lg-4">
+        <div class="p gall">
+         <h2 class=" gallH ">Nainital</h2>
+         <div class="c gallI">
+           <img src="static/img/nainitaal3.jpeg"  class="card-img" height="300px"    alt="">
+         </div>
+        </div>
+       </div>
+      <div class="col-lg-6 lg pt-lg-5">
+      <div class="p gall">
+        <h2 class=" gallH ">Himalayas <br> from Harshil</h2>
+        <div class="c gallI ">
+          <img src="static/img/selfImages/img9.jpg" class="card-img" height="300px"   alt="">
+        </div>
+      </div>  
+      </div>
+      <div class="col-12 sm mt-4 pt-lg-5">
+        <div class="p gall">
+          <h2 class=" gallH ">Himalayas <br> from Harshil</h2>
+          <div class="c gallI ">
+            <img src="static/img/selfImages/img9.jpg" class="card-img" height="300px"   alt="">
+          </div>
+        </div>  
+        </div>
+        <div class="col-lg-3 lg pt-lg-5">
+        <div class="p gall">
+          <h2 class="gallH ">Gartang Gali, <br>Harshil</h2>
+          <div class="c gallI">
+            <img src="static/img/selfImages/img11.jpg" class="card-img" height="300px"   alt="">
+          </div>
+        </div>
+        </div>
+        <div class="col-6 mt-4 sm pt-lg-5">
+          <div class="p gall">
+            <h2 class="gallH ">Gartang Gali, <br>Harshil</h2>
+            <div class="c gallI">
+              <img src="static/img/selfImages/img11.jpg" class="card-img" height="300px"   alt="">
+            </div>
+          </div>
+          </div>
+        <div class="col-lg-3 lg pt-lg-5">
+          <div class="p gall">
+           <h2 class="gallH ">Nainital</h2>
+           <div class="c gallI">
+             <img src="static/img/nainital2.jpeg" class="card-img" height="300px"   alt="">
+           </div>
+          </div>
+         </div>
+         <div class="col-6 mt-4 sm pt-lg-5">
+          <div class="p gall">
+           <h2 class="gallH ">Nainital</h2>
+           <div class="c gallI">
+             <img src="static/img/nainital2.jpeg" class="card-img" height="300px"   alt="">
+           </div>
+          </div>
+         </div>
+        <div class="col-lg-6 lg pt-lg-5"> 
+        <div class="p gall">
+          <h2 class="gallH ">Srinagar Garhwal</h2>
+          <div class="c gallI">
+            <img src="static/img/selfImages/img18.jpg" class="card-img" height="300px"  alt="">
+          </div>
+        </div>  
+        </div>
+        <div class="col-12 mt-4 sm pt-lg-5"> 
+          <div class="p gall">
+            <h2 class="gallH ">Srinagar Garhwal</h2>
+            <div class="c gallI">
+              <img src="static/img/selfImages/img18.jpg" class="card-img" height="300px"  alt="">
+            </div>
+          </div>  
+          </div>
+          <div class="col-lg-6 lg pt-lg-5">
+            <div class="p gall">
+              <h2 class="gallH ">Tungnath</h2>
+              <div class="c gallI">
+                <img src="static/img/selfImages/img12.jpg" class="card-img" height="300px"  alt=""></div>
+              </div>
+            </div>
+            <div class="col-12 mt-4 sm pt-lg-5">
+              <div class="p gall">
+                <h2 class="gallH ">Tungnath</h2>
+                <div class="c gallI">
+                  <img src="static/img/selfImages/img12.jpg" class="card-img" height="300px"  alt=""></div>
+                </div>
+              </div>
+    </div>
+    <div class="row pt-4">
+      <div class="col-lg-12">
+        <p class="para pt-4">This Site is basically like the travel guide in hand. It will explain the things which can come handy for an explorer. But its much more than
+           it sounds like, As exploration is not just about travelling places its about exploring places which are 
+           loved by many people around the world. Conclusion: This site is for you if you are sitting and wonder if you can wander.. <br>Dive in..! <span><img src="static/icons/scuba.png" height="40px" width="50px" alt=""></span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section> 
+
+<!--what you want-->
+
+<section class="where">
+  <div class="container h-100 pb-5">
+    <div class="row">
+      <h2 class="heading text-center">Where To?</h2>
+      <div class="col-lg-12 text-lg-center">
+        <p class="para text-light fwbold">
+          When Planning a trip or travel adventure the first question arises is WHERE TO? Like what kind of place you want to travel
+          Cold? Hot? Snow? Spiritual? Trek? Waterfall?  Mixed? Here are some options you can choose from while planning your next adventure.  
+        </p>
+      </div>
+      <div class="col-lg-6 mt-4">
+        <div id="carouselExampleIndicators" class="carousel-fade slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" >
+          <div class="carousel-item citem act active">
+            <img class="d-block w-100" src="static/img/trek.jpeg" class="citem" height="400px" alt="First slide">
+            <div class="carousel-caption d-none d-md-block">
+              <div class="overlay">
+                <h5 class=" d-inline-block wth">Trekking</h5>
+                <div class="over">
+                  <p class="whpara d-inline-block">Trekking is recreational activity that involves covering any specified journey on foot.</p>
+                </div> 
+              </div>
+            
+            </div>
+          </div>
+          <div class="carousel-item citem" >
+            <img class="d-block w-100" src="static/img/trek2.jpeg" height="400px" alt="Second slide">
+            <div class="carousel-caption d-none d-md-block">
+              <div class="overlay">
+                <h5 class=" d-inline-block wth">Rudranath Trek</h5>
+              </div>
+              <div class="over">
+                <p class=" whpara d-inline-block">Rudranath (Sanskrit: रुद्रनाथ) is a Hindu temple dedicated to God Shiva,
+                  located in the Garhwal Himalayan mountains in Uttarakhand, India.</p>
+              </div>
+            
+            </div>
+          </div>
+          <div class="carousel-item citem">
+            <img class="d-block w-100" src="static/img/roopkundTrek.webp" height="400px" alt="Third slide">
+            <div class="carousel-caption d-none d-md-block">
+              <div class="overlay">
+                <h5 class=" d-inline-block wth" >Roopkund Trek</h5>
+              </div>
+              <div class="over">
+                <p class="whpara d-inline-block">Roopkund is a high altitude glacial lake in the Uttarakhand
+                  state of India. It lies in the lap of Trishul massif. Located in the Himalayas,</p>
+              </div>
+ 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="col-lg-6 mt-4 ">
+        <div id="carouselExampleIndicators2" class="carousel-fade slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators2" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item citem act active">
+            <img class="d-block w-100" src="static/img/withouttrek.jpeg" height="400px" alt="First slide">
+            <div class="carousel-caption  d-md-block">
+              <div class="overlay">
+                <h5 class=" d-inline-block wth">Close to Nature Without Trek</h5>
+              </div>
+              <div class="over">
+                <p class="whpara d-inline-block">If you feel Trekking is tiring but you want to feel the vibe of nature.</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item citem">
+            <img class="d-block w-100" src="static/img/where3.jpeg" height="400px" alt="Second slide">
+            <div class="carousel-caption d-none d-md-block">
+              <div class="overlay">
+                <h5 class=" d-inline-block wth">Harshil</h5><br>
+              </div>
+              <div class="over">
+                <p class="whpara d-inline-block">
+                  Probably the most beautiful place in Uttarakhand.
+                   </p>
+              </div>
+            
+            </div>
+          </div>
+          <div class="carousel-item citem">
+            <img class="d-block w-100" src="static/img/georgeevt.jpeg" height="400px" alt="Third slide">
+            <div class="carousel-caption  d-md-block">
+              <div class="overlay">
+                <h5 class=" d-inline-block wth">George Everest, Mussourie</h5>
+              </div>
+              <div class="over">
+                <p class="whpara text-dark d-inline-block">
+                  Another Fine Place which you can go although the highest peak in here required trekking but even without that the view is Good.
+                   </p>
+              </div>
+           
+            </div>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+      <div class="col-lg-6 mt-4">
+        <div id="carouselExampleIndicators3" class="carousel-fade slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators3" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators3" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators3" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner ">
+          <div class="carousel-item citem act active">
+            <img class="d-block w-100" src="static/img/where5.webp" height="400px" alt="First slide">
+            <div class="carousel-caption d-md-block">
+              <div class="overlay">
+                <h5 class=" d-inline-block wth">Crowd</h5><br>
+              </div>
+              
+           <div class="over">
+            <p class="whpara d-inline-block">
+              If you are interested in visiting somewhere that is known for tourism because of their artificial beauties.
+               </p>
+           </div>
+            </div>
+          </div>
+          <div class="carousel-item citem">
+            <img class="d-block w-100" src="static/img/naini.webp" height="400px" alt="Second slide">
+            <div class="carousel-caption  d-md-block">
+              <div class="overlay">
+                <h5 class=" d-inline-block wth">Nainital</h5><br>
+              </div>
+              <div class="over">
+                <p class="whpara d-inline-block">Just take bus and go.</p>
+              </div>
+              
+            </div>
+          </div>
+          <div class="carousel-item citem">
+            <img class="d-block w-100" src="static/img/musu.jpg" height="400px" alt="Third slide">
+            <div class="carousel-caption d-md-block">
+              <div class="overlay">
+                <h5 class=" d-inline-block wth">Mussourie</h5><br>
+              </div>
+              <div class="over">
+                <p class="whpara d-inline-block">Known As the Queen Of Hills for some apparent Reasons.</p>
+              </div>
+              
+            </div>
+          </div>
+         
+        </div>
+       
+      </div>
+    </div>
+      <div class="col-lg-6 mt-4">
+        <div id="carouselExampleIndicators4" class="carousel-fade slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators4" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators4" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators4" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item citem  active ">
+            <img class="d-block w-100" src="static/img/rishi.jpeg" height="400px" alt="First slide">
+            <div class="carousel-caption  d-md-block">
+              <div class="overlay"><h5 class=" d-inline-block wth">Close To Spirituality</h5><br></div>
+              <div class="over">  <p class="whpara d-inline-block">Uttarakhand is known for the land of gods so one can always stay close to religion and culture.
+              </p></div>
+              
+            
+            </div>
+          </div>
+          <div class="carousel-item citem">
+            <img class="d-block w-100" src="static/img/gangaarti.jpeg" height="400px" alt="Second slide">
+            <div class="carousel-caption  d-md-block">
+              <div class="overlay"><h5 class=" d-inline-block wth">Ganga Arti , Rishikesh</h5><br></div>
+              <div class="over">   <p class="whpara d-inline-block">Prayer of River Ganga as it is considered to be sacred river. That is performed every evening in the shore of Ganga 
+              </p></div>
+              
+           
+            </div>
+          </div>
+          <div class="carousel-item citem">
+            <img class="d-block w-100" src="static/img/bdrinath.avif" height="400px"  alt="Third slide">
+            <div class="carousel-caption d-md-block">
+              <div class="overlay"><h5 class=" d-inline-block wth">Badrinath</h5><br></div>
+              <div class="over">    
+                <p class="whpara d-inline-block z-3 ">
+                  Badrinath is one of the 4 dhams of India which is in Uttarakhand. It is just before the Last Village of India, Mana.
+                   </p></div>
+          
+            </div>
+          </div>
+       
+        </div>
+      
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+<!--FORM-->
+{% if user.is_authenticated %}
+{%else%}
+<section class="form">
+
+  <div class="container ">
+    <h2 class="heading text-center"></h2>
+    <div class="row">
+      
+      <div class="col-lg-12 pf">
+          <div class="row">
+            <h2 class="formHead">Join Us</h2>
+             
+
+          </div>
+        
+          <div class="row">
+
+              <p class="formPara">Sign Up To Join And
+                Be Part Of Our Community. </p>
+          </div>
+
+                <div class="row">
+<div class="col-lg-3"></div>
+<div class="col-lg-6 ">
+  <img src="static/icons/community.png" width="50px" height="70px" class="d-block ms-auto me-auto" alt="">
+</div>
+<div class="col-lg-3"></div>
+                  
+                </div>
+          
+          <div class="row">
+
+            <a href="form" class="formb1 text-decoration-none"  target="_blank"> <button class="btn bt1 btn-light" > Sign Up</button></a>
+
+          </div>
+
+      </div>
+      <div class="col-lg-6 ">
+      
+      </div>
+    </div>
+  </div>
+</section>
+{%endif%}
+
+<!--FAQ-->
+<section class="faq">
+  <h2 class="faqH text-center pt-3">
+    Frequently Asked Questions
+  </h2>
+
+  <div class="container pt-4 pb-5">
+    <div class="row">
+      <div class="cl-lg-12">
+        <div class="accordion">
+          <div class="row">
+            <div class="col-lg-6">  <div class="accordion-item ">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <p class="acQ">- What is the best time to visit Mussourie?</p>
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <p class="aca"> It is best to visit Mussourie in between June and December. Because in June, Mussourie is probably the most 
+                  crowded place in Uttarakhand. You can visit other hill-stations in Month of June to avoid the scorching sun of summer.</p>
+                </div>
+              </div>
+            </div></div>
+          <div class="col-lg-6">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <p class="acQ">- Budget Friendly Places To visit in Uttarakhand.</p>
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <p class="aca">Uttarakhand is expensive state but the places which are considered as tourism hotspot, are much expensive due to their Ecstatical, Historical and Spiritual Significance. So If you want some place to visit
+                    under the budget then consider travelling in off season, unless you are going for Spiritual purpose as the temples are not always open they have their fixed time to visit in a year.    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+        <div class="col-lg-6"> <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <p class="acQ">- Must visit destination in Uttarakhand.</p>
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <p class="aca">Uttarakhand is full of places where you find bugyal or snow , trekk or plane , Spiritual or Historical so i would say that whole Uttarakhand is must visit but i you ask me out of the places i visit to 
+                recommend Harshil Valley , Uttarkashi . You will not be disappointed.
+              </p>
+            </div>
+          </div>
+        </div></div>
+        <div class="col-lg-6">  <div class="accordion-item">
+          <h2 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              <p class="acQ">- Are there wild animals in Mountains?</p>
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <p class="aca">If you are travelling in two wheeler,in the mountains, then avoid riding at night as the occurence of wild animals at night is more in Uttarakhand Mountain Areas. </p>
+            </div>
+          </div>
+        </div></div>
+         
+        <div class="col-lg-6">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                <p class="acQ">- Why Uttarakhand is called Land Of Gods (Dev Bhoomi)?</p>
+              </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <p class="aca">Uttarakhand is known as 'Dev Bhoomi' or the 'Land of the Gods' due to its rich religious and spiritual heritage. The region is home to several ancient temples,
+                   pilgrimage sites, and shrines, which are believed to be associated with various gods and goddesses of Hindu mythology.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                <p class="acQ">- Things to know before travelling in Uttarakhand.</p>
+              </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <p class="aca">Weather is most important thing to know about in Uttarakhand due to past experiences. 
+                  So have a look on weather forecast before travelling in Uttarkhand. As the Natural Disasters are common in Uttarakhand besides Natural beauties.
+</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--footer-->
+
+<section class="pt-5 footer">
+  <div class="container ">
+      <div class="row">
+          <div class="col-lg-4 col-12 fc1">
+            <img src="static/icons/travelling.png" height="40px" width="40px" alt="">
+              <h5 class="footerH px-3 d-inline-block fs-4">Get in touch</h5>
+              <ul class="pt-3">
+                  <li class="foot">Contact Us: +91-7579021769</li>
+                     <li class="foot">Inquiry: +91-129802121</li> 
+                  <li class="foot">Email Id: devansh.kandari@gmail.com</li>
+              </ul>
+              <nav class=" ps-5 nav">
+                  <ul class="list-unstyled">
+                      <a href=""><img src="static/icons/facebook.png" class=" px-2" height="30px" width="40px" alt=""></a>
+                      <a href=""><img src="static/icons/twitter.png" height="30px" class="px-2" width="40px" alt=""></a>
+                      <a href=""><img src="static/icons/whatsapp.png" height="30px" width="40px" class="px-2" alt=""></a>
+                  </ul>
+              </nav>
+          </div>
+          <div class="col-lg-4 col-4 fc2 ">
+            <h6 class=" footerH fs-5 ms-2 ">Menu</h6>
+            <ul class="nav z-3 ">
+              
+              <li class="nav-item "><a class="foot text-decoration-none fs-6" href="">About</a></li>
+              <li class="nav-item "><a class=" foot text-decoration-none fs-6" href="">Places</a></li>
+              <li class="nav-item "><a class=" foot text-decoration-none fs-6" href="">Services</a></li>
+            </ul>
+            <div class="row mt-3">
+              <div class="col-lg-12">
+                <h6 class=" footerH fs-5 ms-2">Pages</h6>
+                <ul class="nav z-3 ">
+                  <li class="nav-item "><a class="foot text-decoration-none fs-6" href="">Tourist</a></li>
+                  <li class="nav-item "><a class=" foot text-decoration-none fs-6" href="">Spiritual</a></li>
+                  <li class="nav-item "><a class=" foot text-decoration-none fs-6" href="">Treks</a></li>
+                  <li class="nav-item "><a class=" foot text-decoration-none fs-6" href="">Hills</a></li>
+                </ul>
+              </div>
+            </div>
+      </div>
+      <div class="col-lg-4 col-4  fc3">
+        <div class="row">
+          <h4 class="text-center ask">Want to Know More ?</h4>
+        </div>
+        <form method="POST" action="">
+          {% csrf_token %}
+          <input type="text" id="name" name="name" placeholder="Your Name" class="forminput rounded-3" required>
+          <input type="email" id="email" name="email" placeholder="Your Email"  class="forminput rounded-3" required>
+          <input type="text" id="message" cols="30" rows="10" class="forminputtxt rounded-3" name="msg" required placeholder="You Want To Know About..?"></Input>
+           <a href="" class="formB text-decoration-none"><button class="btn bt1 btn-warning">Send</button></a> 
+      </form>
+
+     
+
+
+  </div>
+      </div>
+  </div>
+  <p class="text-center text-light pt-5">@ Devansh Kandari 2023</p>
+</section>
+
+   
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+
+<script>
+    $('.owl-carousel').owlCarousel({
+    items:1,
+    nav:false,
+    autoplay:true,
+    autoplayTimeout:5000,
+    stagePadding:0,
+    loop:true,
+    smartSpeed:450,
+    dots:false,
+});
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script>  
+  function sendEmail() {
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+      let message = document.getElementById("message").value;
+      let finalmessage = `Name : ${name} <br>  Email : ${email} <br>  Message : ${message} <br>`;
+      Email.send({
+          Host : "smtp.elasticemail.com",
+          Username : "Devansh.kandari@gmail.com",
+          Password : "7CCE9D5ECD738CEC3126FDAE326034365B34",
+          From: "devansh.kandari@gmail.com",
+          To: email,
+          Subject : "Mail from website",
+          Body : finalmessage
+      }).then(
+        message => alert(message)
+      );
+  }
+  </script>
+  
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+</html>
